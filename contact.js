@@ -8,7 +8,7 @@ const contactsPath = path.join(__dirname, './db/contacts.json');
 async function listContacts() {
     const data = await fs.readFile(contactsPath)
     const string = data.toString();
-
+    console.log(string);
     const object = JSON.parse(string);
     return object;
 }
@@ -27,6 +27,8 @@ async function removeContact(contactId) {
     const jsonFilteredFiles = JSON.stringify(filteredContacts);
 
     fs.writeFile(contactsPath, jsonFilteredFiles, 'utf8');
+
+    console.log(await listContacts());
 }
   
 async function addContact(name, email, phone) {
@@ -43,6 +45,9 @@ async function addContact(name, email, phone) {
     const jsonContacts = JSON.stringify(object);
 
     await fs.writeFile(contactsPath, jsonContacts);
+
+    console.log(await listContacts());
+
 }
 
 
